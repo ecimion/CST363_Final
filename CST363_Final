@@ -1,0 +1,17 @@
+Movie Recommendation
+
+The purpose of our database is to recommend movies to people based on information they submit. For example, someone could enter "Horror" and movies within the database that meet that criteria will populate. Our database will have the following tables:
+
+  -Actor: ActorId, FirstName, LastName, AcademyAwardWinner
+
+  -Movie: MovieId, Title, Year, Genre
+
+  -Director: DirectorId, FirstName, LastName
+
+  -CastCrew: MovieId, LeadActor, Director
+
+  -MovieStats: MovieId, Budget, Gross, AvgUserRating, NumAcademyAwards
+
+  -MovieRatings: MovieId, UserId, Rating
+
+  -Users: Username, FirstName, LastName
