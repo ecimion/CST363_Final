@@ -57,8 +57,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `cst336final`.`MovieStats` (
   `MovieId` INT NOT NULL,
-  `Budget` DECIMAL(9,2) NULL DEFAULT NULL,
-  `Gross` DECIMAL(9,2) NULL,
+  `Budget` DECIMAL(15,2) NULL DEFAULT NULL,
+  `Gross` DECIMAL(15,2) NULL,
   `AcademyAwards` INT NOT NULL DEFAULT 0,
   `AvgUserRating` DECIMAL(2,2) NULL DEFAULT 0.00,
   PRIMARY KEY (`MovieId`),
