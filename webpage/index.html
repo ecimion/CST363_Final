@@ -11,7 +11,7 @@
     <div class="center-zone">
         <div class="top_zone">
             <div class="header">Final Project: Movies</div>
-            <div class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+            <div class="description">The purpose of our database is to recommend movies to people based on information they submit. For example, someone could enter "Horror" and movies within the database that meet that criteria will populate.</div>
         </div>
         <div class="bottom_zone">
             <div class="movie_genre" id="movie_genre">
@@ -53,7 +53,7 @@
     }
 
     function get_movie_info(id) {
-        update_page("orders=get_movie_info")
+        update_page("orders=get_movie_info&id=" + id, "movie_information")
     }
 
 </script>

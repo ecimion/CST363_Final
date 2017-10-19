@@ -19,7 +19,7 @@ function db_Query($query) {
 /// Do Work
 
 function get_genres() {
-    $db = db_Query("SELECT DISTINCT(Genre) FROM Movies");
+    $db = db_Query("SELECT DISTINCT(Genre) FROM Movies ORDER BY Genre");
     if($db->num_rows > 0) {
         print "<div class='bottom_header'>Choose a Genre</div>";
         print "<ul>";
@@ -29,12 +29,12 @@ function get_genres() {
         print "</ul>";
     }
     else {
-        print "<p>Didn't return anything</p>";
+        print "<p>DATABASE ERROR</p>";
     }
 }
 
 function get_movies($genre) {
-    $db = db_Query("SELECT CONCAT(title, ' (', Year, ' )') AS selection, MovieId FROM Movies WHERE Genre = '$genre'");
+    $db = db_Query("SELECT CONCAT(title, ' (', Year, ')') AS selection, MovieId FROM Movies WHERE Genre = '$genre' ORDER BY title ASC");
     if($db->num_rows > 0) {
         print "<div class='bottom_header'>Choose a Movie</div>";
         print "<ul>";
@@ -44,22 +44,61 @@ function get_movies($genre) {
         print "</ul>";
     }
     else {
-        print "<p>Didn't return anything</p>";
+        print "<p>DATABASE ERROR</p>";
     }
 }
 
+
+/*
+
+ SELECT m.Title AS MOVIE_NAME, m.Year AS MOVIE_YEAR, m.Genre AS MOVIE_GENRE,
+                ms.Budget AS MOVIE_BUDGET, ms.Gross AS MOVIE_GROSS, ms.AcademyAwards AS MOVIE_ACADEMYAWARDS, ms.AvgUserRating AS MOVIE_AVGUSERRATING,
+                CONCAT(d.Firstname, ' ', d.LastName) AS MOVIE_DIRECTORNAME,
+                CONCAT(a.FirstName,' ', a.LastName) AS MOVIE_ACTORNAME, a.AcademyAwardWinner AS MOVIE_ACADEMYAWARDWINNER
+ FROM Movies m
+ INNER JOIN MovieStats ms ON m.MovieId = ms.MovieId
+ INNER JOIN CastCrew cc ON ms.MovieId = cc.MovieId
+ INNER JOIN Director d ON d.DirectorId = cc.Director
+ INNER JOIN Actors a ON a.ActorId = cc.LeadActor
+ WHERE m.MovieId = '$id'
+ */
+
+
 function get_movie_info($id) {
-    $db = db_Query("SELECT CONCAT(title, ' (', Year, ' )') AS selection, MovieId FROM Movies WHERE Genre = '$genre'");
+    $db = db_Query("
+         SELECT m.Title AS MOVIE_NAME, m.Year AS MOVIE_YEAR, m.Genre AS MOVIE_GENRE,
+                ms.Budget AS MOVIE_BUDGET, ms.Gross AS MOVIE_GROSS, ms.AcademyAwards AS MOVIE_ACADEMYAWARDS, ms.AvgUserRating AS MOVIE_AVGUSERRATING,
+                CONCAT(d.Firstname, ' ', d.LastName) AS MOVIE_DIRECTORNAME,
+                CONCAT(a.FirstName,' ', a.LastName) AS MOVIE_ACTORNAME, a.AcademyAwardWinner AS MOVIE_ACADEMYAWARDWINNER
+         FROM Movies m
+         INNER JOIN MovieStats ms ON m.MovieId = ms.MovieId
+         INNER JOIN CastCrew cc ON ms.MovieId = cc.MovieId
+         INNER JOIN Director d ON d.DirectorId = cc.Director
+         INNER JOIN Actors a ON a.ActorId = cc.LeadActor
+         WHERE m.MovieId = '$id'");
     if($db->num_rows > 0) {
-        print "<div class='bottom_header'>Choose a Movie</div>";
-        print "<ul>";
         while($row = $db->fetch_assoc()) {
-            print "<li><a class='Movie_selection_item' onclick='get_movie_info(\"" . $row['MovieId'] ."\")'>" . $row['selection']. "</a></li>";
+            print "<div class='info_movie_name'><strong>Movie Name: </strong>" . $row['MOVIE_NAME'] ."</div>";
+
+            print "<div class='info_movie_text'><strong>Year: </strong>" . $row['MOVIE_YEAR'] . "</div>";
+            print "<div class='info_movie_text'><strong>Genre: </strong>" . $row['MOVIE_GENRE'] . "</div>";
+            print "<div class='info_movie_text'><strong style='color:red;'>Budget: </strong>" . $row['MOVIE_BUDGET'] . "</div>";
+            print "<div class='info_movie_text'><strong style='color:green;'>Gross: </strong>" . $row['MOVIE_GROSS'] . "</div>";
+            print "<div class='info_movie_text'><strong>Academy Awards: </strong>" . $row['MOVIE_ACADEMYAWARDS'] . "</div>";
+            print "<div class='info_movie_text'><strong>Average User Rating: </strong>" . $row['MOVIE_AVGUSERRATING'] . "</div>";
+            print "<div class='info_movie_text'><strong>Director: </strong>" . $row['MOVIE_DIRECTORNAME'] . "</div>";
+            print "<div class='info_movie_text'><strong>Lead Actor: </strong>" . $row['MOVIE_ACTORNAME'] . "</div>";
+
+            if($row['MOVIE_ACADEMYAWARDWINNER'] == 'T') {
+                print "<div class='info_movie_text'><i>Academy Award Winning Actor</i></div>";
+            }
+
+//            print "<div class='info_movie_text'><strong>: </strong>" . $row[''] . "</div>";
+//            print "<div class='info_movie_text'><strong>: </strong>" . $row[''] . "</div>";
         }
-        print "</ul>";
     }
     else {
-        print "<p>Didn't return anything</p>";
+        print "<p>DATABASE ERROR</p>";
     }
 }
 
