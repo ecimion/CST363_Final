@@ -78,16 +78,16 @@ function get_movie_info($id) {
          WHERE m.MovieId = '$id'");
     if($db->num_rows > 0) {
         while($row = $db->fetch_assoc()) {
-            print "<div class='info_movie_name'><strong>Movie Name: </strong>" . $row['MOVIE_NAME'] ."</div>";
+            print "<div class='info_movie_name'>" . $row['MOVIE_NAME'] ."</div>";
 
-            print "<div class='info_movie_text'><strong>Year: </strong>" . $row['MOVIE_YEAR'] . "</div>";
-            print "<div class='info_movie_text'><strong>Genre: </strong>" . $row['MOVIE_GENRE'] . "</div>";
-            print "<div class='info_movie_text'><strong style='color:red;'>Budget: </strong>" . $row['MOVIE_BUDGET'] . "</div>";
-            print "<div class='info_movie_text'><strong style='color:green;'>Gross: </strong>" . $row['MOVIE_GROSS'] . "</div>";
-            print "<div class='info_movie_text'><strong>Academy Awards: </strong>" . $row['MOVIE_ACADEMYAWARDS'] . "</div>";
-            print "<div class='info_movie_text'><strong>Average User Rating: </strong>" . $row['MOVIE_AVGUSERRATING'] . "</div>";
-            print "<div class='info_movie_text'><strong>Director: </strong>" . $row['MOVIE_DIRECTORNAME'] . "</div>";
-            print "<div class='info_movie_text'><strong>Lead Actor: </strong>" . $row['MOVIE_ACTORNAME'] . "</div>";
+            print "<div class='info_movie_text'><b>Year: </b>" . $row['MOVIE_YEAR'] . "</div>";
+            print "<div class='info_movie_text'><b>Genre: </b>" . $row['MOVIE_GENRE'] . "</div>";
+            print "<div class='info_movie_text'><b style='color:red;'>Budget: </b>" . $row['MOVIE_BUDGET'] . "</div>";
+            print "<div class='info_movie_text'><b style='color:green;'>Gross: </b>" . $row['MOVIE_GROSS'] . "</div>";
+            print "<div class='info_movie_text'><b>Academy Awards: </b>" . $row['MOVIE_ACADEMYAWARDS'] . "</div>";
+            print "<div class='info_movie_text'><b>Average User Rating: </b>" . $row['MOVIE_AVGUSERRATING'] . "</div>";
+            print "<div class='info_movie_text'><b>Director: </b>" . $row['MOVIE_DIRECTORNAME'] . "</div>";
+            print "<div class='info_movie_text'><b>Lead Actor: </b>" . $row['MOVIE_ACTORNAME'] . "</div>";
 
             if($row['MOVIE_ACADEMYAWARDWINNER'] == 'T') {
                 print "<div class='info_movie_text'><i>Academy Award Winning Actor</i></div>";

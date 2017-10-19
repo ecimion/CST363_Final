@@ -117,3 +117,16 @@ img {
     cursor: pointer;
     color: white;
 }
+
+
+/* --------------------------------------------------- */
+
+.info_movie_name {
+    text-align: center;
+    font-size: 24pt;
+}
+
+.info_movie_text {
+    margin-left: 10px;
+    font-weight: lighter;
+}
