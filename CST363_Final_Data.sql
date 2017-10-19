@@ -1,4 +1,4 @@
-INSERT INTO movies VALUES
+INSERT INTO Movies VALUES
 (null, 'Memento', 2001, 'Suspense'),
 (null, 'Matrix', 1999, 'Sci-Fi'),
 (null, 'Inception', 2010, 'Sci-Fi'),
