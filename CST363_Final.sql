@@ -19,7 +19,7 @@ USE `cst336final` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `cst336final`.`Movies` (
   `MovieId` INT NOT NULL AUTO_INCREMENT,
-  `Ttitle` VARCHAR(45) NOT NULL,
+  `Title` VARCHAR(45) NOT NULL,
   `Year` INT NOT NULL,
   `Genre` VARCHAR(15) NOT NULL,
   UNIQUE INDEX `MovieId_UNIQUE` (`MovieId` ASC),
