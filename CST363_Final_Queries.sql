@@ -15,7 +15,7 @@ ON Movies.MovieId = MovieStats.MovieId;
 
 
 SELECT * FROM
-	(SELECT Ttitle, Genre, Gross
+	(SELECT Title, Genre, Gross
 	FROM Movies JOIN MovieStats
 	WHERE Movies.MovieId = MovieStats.MovieId
 	AND Genre = 'Suspense'
@@ -24,7 +24,7 @@ SELECT * FROM
     
 JOIN
 
-	(SELECT Ttitle, Genre, Gross
+	(SELECT Title, Genre, Gross
 	FROM Movies JOIN MovieStats
 	WHERE Movies.MovieId = MovieStats.MovieId
 	AND Genre = 'Sci-Fi'
@@ -33,7 +33,7 @@ JOIN
 
 JOIN
 
-	(SELECT Ttitle, Genre, Gross
+	(SELECT Title, Genre, Gross
 	FROM Movies JOIN MovieStats
 	WHERE Movies.MovieId = MovieStats.MovieId
 	AND Genre = 'Drama'
@@ -42,7 +42,7 @@ JOIN
     
 JOIN
 
-	(SELECT Ttitle, Genre, Gross
+	(SELECT Title, Genre, Gross
 	FROM Movies JOIN MovieStats
 	WHERE Movies.MovieId = MovieStats.MovieId
 	AND Genre = 'Romance'
@@ -51,7 +51,7 @@ JOIN
     
 JOIN
 
-	(SELECT Ttitle, Genre, Gross
+	(SELECT Title, Genre, Gross
 	FROM Movies JOIN MovieStats
 	WHERE Movies.MovieId = MovieStats.MovieId
 	AND Genre = 'Crime'
@@ -60,7 +60,7 @@ JOIN
     
 JOIN
 
-	(SELECT Ttitle, Genre, Gross
+	(SELECT Title, Genre, Gross
 	FROM Movies JOIN MovieStats
 	WHERE Movies.MovieId = MovieStats.MovieId
 	AND Genre = 'Action'
@@ -69,7 +69,7 @@ JOIN
 
 JOIN
 
-	(SELECT Ttitle, Genre, Gross
+	(SELECT Title, Genre, Gross
 	FROM Movies JOIN MovieStats
 	WHERE Movies.MovieId = MovieStats.MovieId
 	AND Genre = 'Mystery'
@@ -78,7 +78,7 @@ JOIN
     
 JOIN
 
-	(SELECT Ttitle, Genre, Gross
+	(SELECT Title, Genre, Gross
 	FROM Movies JOIN MovieStats
 	WHERE Movies.MovieId = MovieStats.MovieId
 	AND Genre = 'Animation'
@@ -87,7 +87,7 @@ JOIN
     
 JOIN
 
-	(SELECT Ttitle, Genre, Gross
+	(SELECT Title, Genre, Gross
 	FROM Movies JOIN MovieStats
 	WHERE Movies.MovieId = MovieStats.MovieId
 	AND Genre = 'Horror'
