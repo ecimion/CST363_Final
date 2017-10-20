@@ -8,6 +8,93 @@ SELECT Movies.Title, Movies.Genre, MovieStats.AvgUserRating
 FROM Movies JOIN MovieStats
 ON Movies.MovieId = MovieStats.MovieId;
 
+-- -----------------------------------------------------
+-- Selects highest grossing movie in each genre
+-- Can someone fix this? It's all adding to one row instead of multiple :/
+-- -----------------------------------------------------
+
+
+SELECT * FROM
+	(SELECT Ttitle, Genre, Gross
+	FROM Movies JOIN MovieStats
+	WHERE Movies.MovieId = MovieStats.MovieId
+	AND Genre = 'Suspense'
+	ORDER BY Gross DESC
+	LIMIT 1) t1
+    
+JOIN
+
+	(SELECT Ttitle, Genre, Gross
+	FROM Movies JOIN MovieStats
+	WHERE Movies.MovieId = MovieStats.MovieId
+	AND Genre = 'Sci-Fi'
+    ORDER BY Gross DESC
+	LIMIT 1) t2
+
+JOIN
+
+	(SELECT Ttitle, Genre, Gross
+	FROM Movies JOIN MovieStats
+	WHERE Movies.MovieId = MovieStats.MovieId
+	AND Genre = 'Drama'
+    ORDER BY Gross DESC
+	LIMIT 1) t3
+    
+JOIN
+
+	(SELECT Ttitle, Genre, Gross
+	FROM Movies JOIN MovieStats
+	WHERE Movies.MovieId = MovieStats.MovieId
+	AND Genre = 'Romance'
+    ORDER BY Gross DESC
+	LIMIT 1) t4
+    
+JOIN
+
+	(SELECT Ttitle, Genre, Gross
+	FROM Movies JOIN MovieStats
+	WHERE Movies.MovieId = MovieStats.MovieId
+	AND Genre = 'Crime'
+    ORDER BY Gross DESC
+	LIMIT 1) t5
+    
+JOIN
+
+	(SELECT Ttitle, Genre, Gross
+	FROM Movies JOIN MovieStats
+	WHERE Movies.MovieId = MovieStats.MovieId
+	AND Genre = 'Action'
+    ORDER BY Gross DESC
+	LIMIT 1) t6
+
+JOIN
+
+	(SELECT Ttitle, Genre, Gross
+	FROM Movies JOIN MovieStats
+	WHERE Movies.MovieId = MovieStats.MovieId
+	AND Genre = 'Mystery'
+    ORDER BY Gross DESC
+	LIMIT 1) t7
+    
+JOIN
+
+	(SELECT Ttitle, Genre, Gross
+	FROM Movies JOIN MovieStats
+	WHERE Movies.MovieId = MovieStats.MovieId
+	AND Genre = 'Animation'
+    ORDER BY Gross DESC
+	LIMIT 1) t8
+    
+JOIN
+
+	(SELECT Ttitle, Genre, Gross
+	FROM Movies JOIN MovieStats
+	WHERE Movies.MovieId = MovieStats.MovieId
+	AND Genre = 'Horror'
+    ORDER BY Gross DESC
+	LIMIT 1) t9
+    
+
 
 -- -----------------------------------------------------
 -- Selects each avaible Genre from Movies once
