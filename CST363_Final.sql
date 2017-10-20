@@ -5,19 +5,19 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 -- -----------------------------------------------------
--- Schema cst336final
+-- Schema cst363final
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema cst336final
+-- Schema cst363final
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `cst336final` DEFAULT CHARACTER SET utf8 ;
-USE `cst336final` ;
+CREATE SCHEMA IF NOT EXISTS `cst363final` DEFAULT CHARACTER SET utf8 ;
+USE `cst363final` ;
 
 -- -----------------------------------------------------
--- Table `cst336final`.`Movies`
+-- Table `cst363final`.`Movies`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `cst336final`.`Movies` (
+CREATE TABLE IF NOT EXISTS `cst363final`.`Movies` (
   `MovieId` INT NOT NULL AUTO_INCREMENT,
   `Title` VARCHAR(45) NOT NULL,
   `Year` INT NOT NULL,
@@ -28,9 +28,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `cst336final`.`Actors`
+-- Table `cst363final`.`Actors`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `cst336final`.`Actors` (
+CREATE TABLE IF NOT EXISTS `cst363final`.`Actors` (
   `ActorId` INT NOT NULL AUTO_INCREMENT,
   `FirstName` VARCHAR(30) NOT NULL,
   `LastName` VARCHAR(45) NOT NULL,
@@ -41,9 +41,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `cst336final`.`Director`
+-- Table `cst363final`.`Director`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `cst336final`.`Director` (
+CREATE TABLE IF NOT EXISTS `cst363final`.`Director` (
   `DirectorId` INT NOT NULL AUTO_INCREMENT,
   `FirstName` VARCHAR(30) NOT NULL,
   `LastName` VARCHAR(45) NOT NULL,
@@ -53,9 +53,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `cst336final`.`MovieStats`
+-- Table `cst363final`.`MovieStats`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `cst336final`.`MovieStats` (
+CREATE TABLE IF NOT EXISTS `cst363final`.`MovieStats` (
   `MovieId` INT NOT NULL,
   `Budget` DECIMAL(15,2) NULL DEFAULT NULL,
   `Gross` DECIMAL(15,2) NULL,
@@ -64,16 +64,16 @@ CREATE TABLE IF NOT EXISTS `cst336final`.`MovieStats` (
   PRIMARY KEY (`MovieId`),
   CONSTRAINT `MovieId`
     FOREIGN KEY (`MovieId`)
-    REFERENCES `cst336final`.`Movies` (`MovieId`)
+    REFERENCES `cst363final`.`Movies` (`MovieId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `cst336final`.`Users`
+-- Table `cst363final`.`Users`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `cst336final`.`Users` (
+CREATE TABLE IF NOT EXISTS `cst363final`.`Users` (
   `UserId` INT NOT NULL AUTO_INCREMENT,
   `Username` VARCHAR(15) NOT NULL,
   `FirstName` VARCHAR(30) NOT NULL,
@@ -85,9 +85,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `cst336final`.`CastCrew`
+-- Table `cst363final`.`CastCrew`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `cst336final`.`CastCrew` (
+CREATE TABLE IF NOT EXISTS `cst363final`.`CastCrew` (
   `MovieId` INT NOT NULL,
   `LeadActor` INT NOT NULL,
   `Director` INT NOT NULL,
@@ -96,26 +96,26 @@ CREATE TABLE IF NOT EXISTS `cst336final`.`CastCrew` (
   INDEX `FK_Director_idx` (`Director` ASC),
   CONSTRAINT `FK_LeadActor`
     FOREIGN KEY (`LeadActor`)
-    REFERENCES `cst336final`.`Actors` (`ActorId`)
+    REFERENCES `cst363final`.`Actors` (`ActorId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `FK_Director`
     FOREIGN KEY (`Director`)
-    REFERENCES `cst336final`.`Director` (`DirectorId`)
+    REFERENCES `cst363final`.`Director` (`DirectorId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `FK_MovieId`
     FOREIGN KEY (`MovieId`)
-    REFERENCES `cst336final`.`Movies` (`MovieId`)
+    REFERENCES `cst363final`.`Movies` (`MovieId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `cst336final`.`MovieRatings`
+-- Table `cst363final`.`MovieRatings`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `cst336final`.`MovieRatings` (
+CREATE TABLE IF NOT EXISTS `cst363final`.`MovieRatings` (
   `MovieId` INT NOT NULL,
   `UserId` INT NOT NULL,
   `Rating` DECIMAL(2,2) NULL DEFAULT 0.00,
@@ -124,12 +124,12 @@ CREATE TABLE IF NOT EXISTS `cst336final`.`MovieRatings` (
   INDEX `fk_Movies_has_Users_Movies1_idx` (`MovieId` ASC),
   CONSTRAINT `fk_Movies_Users_Movies1`
     FOREIGN KEY (`MovieId`)
-    REFERENCES `cst336final`.`Movies` (`MovieId`)
+    REFERENCES `cst363final`.`Movies` (`MovieId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Movies_Users_Users1`
     FOREIGN KEY (`UserId`)
-    REFERENCES `cst336final`.`Users` (`UserId`)
+    REFERENCES `cst363final`.`Users` (`UserId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

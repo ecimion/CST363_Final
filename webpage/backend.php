@@ -6,7 +6,7 @@
 /// Tools
 
 function db_Query($query) {
-    $conn = new mysqli("localhost", "root", "airpolo3", "cst336final");
+    $conn = new mysqli("localhost", "root", "airpolo3", "cst363final");
     if ($conn->connect_error) { print "Database Connection Error"; }
     $result = $conn->query($query);
     $conn->close();

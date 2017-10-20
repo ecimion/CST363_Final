@@ -1,10 +1,10 @@
-USE cst336final;
+USE cst363final;
 
 -- -----------------------------------------------------
 -- Selects from Movies and MovieStats tables to display title of movies, genre, and average rating
 -- -----------------------------------------------------
 
-SELECT Movies.Title, Movies.Genre, MovieStats.AvgUserRating 
+SELECT Movies.Title, Movies.Genre, MovieStats.AvgUserRating
 FROM Movies JOIN MovieStats
 ON Movies.MovieId = MovieStats.MovieId;
 
@@ -21,7 +21,7 @@ SELECT * FROM
 	AND Genre = 'Suspense'
 	ORDER BY Gross DESC
 	LIMIT 1) t1
-    
+
 JOIN
 
 	(SELECT Title, Genre, Gross
@@ -39,7 +39,7 @@ JOIN
 	AND Genre = 'Drama'
     ORDER BY Gross DESC
 	LIMIT 1) t3
-    
+
 JOIN
 
 	(SELECT Title, Genre, Gross
@@ -48,7 +48,7 @@ JOIN
 	AND Genre = 'Romance'
     ORDER BY Gross DESC
 	LIMIT 1) t4
-    
+
 JOIN
 
 	(SELECT Title, Genre, Gross
@@ -57,7 +57,7 @@ JOIN
 	AND Genre = 'Crime'
     ORDER BY Gross DESC
 	LIMIT 1) t5
-    
+
 JOIN
 
 	(SELECT Title, Genre, Gross
@@ -75,7 +75,7 @@ JOIN
 	AND Genre = 'Mystery'
     ORDER BY Gross DESC
 	LIMIT 1) t7
-    
+
 JOIN
 
 	(SELECT Title, Genre, Gross
@@ -84,7 +84,7 @@ JOIN
 	AND Genre = 'Animation'
     ORDER BY Gross DESC
 	LIMIT 1) t8
-    
+
 JOIN
 
 	(SELECT Title, Genre, Gross
@@ -93,7 +93,7 @@ JOIN
 	AND Genre = 'Horror'
     ORDER BY Gross DESC
 	LIMIT 1) t9
-    
+
 
 
 -- -----------------------------------------------------
@@ -109,7 +109,7 @@ SELECT CONCAT(title, ' (', Year, ')') AS selection FROM Movies
 
 
 -- -----------------------------------------------------
--- Selects from Movie, Director, Movie and Movie Stats. Uses 4 INNER JOIN statements to insure MovieId is 
+-- Selects from Movie, Director, Movie and Movie Stats. Uses 4 INNER JOIN statements to insure MovieId is
 -- similar across all. INNER JOIN on CastCrew acts as a conduit for MovieId, DirectorId and ActorId
 -- -----------------------------------------------------
  SELECT m.Title AS MOVIE_NAME, m.Year AS MOVIE_YEAR, m.Genre AS MOVIE_GENRE,
