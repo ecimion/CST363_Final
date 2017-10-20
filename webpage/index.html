@@ -25,6 +25,9 @@
             </div>
         </div>
     </div>
+    <div class="panel" id="panel" onclick="close_panel()">
+        <div class="panel_module" id="panel_module"></div>
+    </div>
 </body>
 <script>
     function build_xmlhttp() {
@@ -54,6 +57,15 @@
 
     function get_movie_info(id) {
         update_page("orders=get_movie_info&id=" + id, "movie_information")
+    }
+
+    function open_panel(id) {
+        update_page("orders=get_panel&id=" + id, "panel_module");
+        document.getElementById("panel").style.visibility = "visible";
+    }
+
+    function close_panel() {
+        document.getElementById("panel").style.visibility = "hidden";
     }
 
 </script>

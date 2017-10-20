@@ -48,34 +48,8 @@ function get_movies($genre) {
     }
 }
 
-
-/*
-
- SELECT m.Title AS MOVIE_NAME, m.Year AS MOVIE_YEAR, m.Genre AS MOVIE_GENRE,
-                ms.Budget AS MOVIE_BUDGET, ms.Gross AS MOVIE_GROSS, ms.AcademyAwards AS MOVIE_ACADEMYAWARDS, ms.AvgUserRating AS MOVIE_AVGUSERRATING,
-                CONCAT(d.Firstname, ' ', d.LastName) AS MOVIE_DIRECTORNAME,
-                CONCAT(a.FirstName,' ', a.LastName) AS MOVIE_ACTORNAME, a.AcademyAwardWinner AS MOVIE_ACADEMYAWARDWINNER
- FROM Movies m
- INNER JOIN MovieStats ms ON m.MovieId = ms.MovieId
- INNER JOIN CastCrew cc ON ms.MovieId = cc.MovieId
- INNER JOIN Director d ON d.DirectorId = cc.Director
- INNER JOIN Actors a ON a.ActorId = cc.LeadActor
- WHERE m.MovieId = '$id'
- */
-
-
 function get_movie_info($id) {
-    $db = db_Query("
-         SELECT m.Title AS MOVIE_NAME, m.Year AS MOVIE_YEAR, m.Genre AS MOVIE_GENRE,
-                ms.Budget AS MOVIE_BUDGET, ms.Gross AS MOVIE_GROSS, ms.AcademyAwards AS MOVIE_ACADEMYAWARDS, ms.AvgUserRating AS MOVIE_AVGUSERRATING,
-                CONCAT(d.Firstname, ' ', d.LastName) AS MOVIE_DIRECTORNAME,
-                CONCAT(a.FirstName,' ', a.LastName) AS MOVIE_ACTORNAME, a.AcademyAwardWinner AS MOVIE_ACADEMYAWARDWINNER
-         FROM Movies m
-         INNER JOIN MovieStats ms ON m.MovieId = ms.MovieId
-         INNER JOIN CastCrew cc ON ms.MovieId = cc.MovieId
-         INNER JOIN Director d ON d.DirectorId = cc.Director
-         INNER JOIN Actors a ON a.ActorId = cc.LeadActor
-         WHERE m.MovieId = '$id'");
+    $db = db_Query("Select * FROM Complete_Information WHERE MovieId = '$id'");
     if($db->num_rows > 0) {
         while($row = $db->fetch_assoc()) {
             print "<div class='info_movie_name'>" . $row['MOVIE_NAME'] ."</div>";
@@ -93,8 +67,7 @@ function get_movie_info($id) {
                 print "<div class='info_movie_text'><i>Academy Award Winning Actor</i></div>";
             }
 
-//            print "<div class='info_movie_text'><strong>: </strong>" . $row[''] . "</div>";
-//            print "<div class='info_movie_text'><strong>: </strong>" . $row[''] . "</div>";
+            print "<div class='info_movie_text'><a onclick='open_panel(\"$id\")' style='color: blue; cursor: pointer;'>Click here to view user ratings</a></div>";
         }
     }
     else {
@@ -103,6 +76,31 @@ function get_movie_info($id) {
 }
 
 
+function get_panel($id) {
+    $db = db_Query("SELECT * FROM UserRatings WHERE MovieId='$id'");
+    if($db->num_rows > 0) {
+        while($row = $db->fetch_assoc()) {
+            print "<div class='panel_text_header'>" . $row['MOVIE_NAME_YEAR'] . "</div>";
+            print "<div class='panel_text_header'>" . $row['AvgUserRating'] . "</div>";
+            break;
+        }
+        while($row = $db->fetch_assoc()) {
+            print "<div class='panel_text'>Username: " . $row['UserName'] ."</div>";
+            print "<div class='panel_text'>First Name: " . $row['FirstName'] ."</div>";
+            print "<div class='panel_text'>Last Name: " . $row['LastName'] ."</div>";
+            if($row['rating'] >= 0.75) {
+                print "<div class='panel_text' style='color:green;'>Rating: " . $row['Rating'] ."</div>";
+            }
+            if($row['rating'] < 0.75 && $row['rating'] >= 0.5) {
+                print "<div class='panel_text' style='color:orange;'>Rating: " . $row['Rating'] ."</div>";
+            }
+            if($row['rating'] < 0.5) {
+                print "<div class='panel_text' style='color:red;'>Rating: " . $row['Rating'] ."</div>";
+            }
+            print "<br>";
+        }
+    }
+}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -116,3 +114,4 @@ $id = $_GET['id'];
 if($orders == "get_movies") { get_movies($genre); }
 if($orders == "get_genres") { get_genres(); }
 if($orders == "get_movie_info") { get_movie_info($id); }
+if($orders == "get_panel") { get_panel($id); }
