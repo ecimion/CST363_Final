@@ -9,91 +9,13 @@ FROM Movies JOIN MovieStats
 ON Movies.MovieId = MovieStats.MovieId;
 
 -- -----------------------------------------------------
--- Selects highest grossing movie in each genre
--- Can someone fix this? It's all adding to one row instead of multiple :/
+-- SELECTS all movies and orders by how much they grossed
 -- -----------------------------------------------------
 
-SELECT * FROM
-	(SELECT Title, Genre, Gross
-	FROM Movies JOIN MovieStats
-	WHERE Movies.MovieId = MovieStats.MovieId
-	AND Genre = 'Suspense'
-	ORDER BY Gross DESC
-	LIMIT 1) t1
-
-JOIN
-
-	(SELECT Title, Genre, Gross
-	FROM Movies JOIN MovieStats
-	WHERE Movies.MovieId = MovieStats.MovieId
-	AND Genre = 'Sci-Fi'
-    ORDER BY Gross DESC
-	LIMIT 1) t2
-
-JOIN
-
-	(SELECT Title, Genre, Gross
-	FROM Movies JOIN MovieStats
-	WHERE Movies.MovieId = MovieStats.MovieId
-	AND Genre = 'Drama'
-    ORDER BY Gross DESC
-	LIMIT 1) t3
-
-JOIN
-
-	(SELECT Title, Genre, Gross
-	FROM Movies JOIN MovieStats
-	WHERE Movies.MovieId = MovieStats.MovieId
-	AND Genre = 'Romance'
-    ORDER BY Gross DESC
-	LIMIT 1) t4
-
-JOIN
-
-	(SELECT Title, Genre, Gross
-	FROM Movies JOIN MovieStats
-	WHERE Movies.MovieId = MovieStats.MovieId
-	AND Genre = 'Crime'
-    ORDER BY Gross DESC
-	LIMIT 1) t5
-
-JOIN
-
-	(SELECT Title, Genre, Gross
-	FROM Movies JOIN MovieStats
-	WHERE Movies.MovieId = MovieStats.MovieId
-	AND Genre = 'Action'
-    ORDER BY Gross DESC
-	LIMIT 1) t6
-
-JOIN
-
-	(SELECT Title, Genre, Gross
-	FROM Movies JOIN MovieStats
-	WHERE Movies.MovieId = MovieStats.MovieId
-	AND Genre = 'Mystery'
-    ORDER BY Gross DESC
-	LIMIT 1) t7
-
-JOIN
-
-	(SELECT Title, Genre, Gross
-	FROM Movies JOIN MovieStats
-	WHERE Movies.MovieId = MovieStats.MovieId
-	AND Genre = 'Animation'
-    ORDER BY Gross DESC
-	LIMIT 1) t8
-
-JOIN
-
-	(SELECT Title, Genre, Gross
-	FROM Movies JOIN MovieStats
-	WHERE Movies.MovieId = MovieStats.MovieId
-	AND Genre = 'Horror'
-    ORDER BY Gross DESC
-	LIMIT 1) t9
-
-
+SELECT m.Title, m.Genre,ms.GrosS AS MAX_GROSS
+FROM Movies 
+INNER JOIN MovieStats ms ON ms.MovieId = m.MovieId
+ORDER BY Gross DESC
 
 -- -----------------------------------------------------
 -- Selects each avaible Genre from Movies once
@@ -140,3 +62,9 @@ FROM MovieRatings mr
 INNER JOIN MovieStats ms ON mr.MovieID = ms.MovieId
 INNER JOIN Movies m ON mr.MovieId = m.MovieId
 INNER JOIN Users u ON mr.UserId = u.UserId
+
+
+-- -----------------------------------------------------
+-- Selects the top 5 highest rated movies based on aveage user reviews
+-- -----------------------------------------------------
+SELECT * FROM Complete_Information ORDER BY AvgUserRating LIMIT 5

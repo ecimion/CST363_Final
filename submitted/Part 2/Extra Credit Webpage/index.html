@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Database Systems Final</title>
+    <link href="styles.css?id=2" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+</head>
+<body onload="populate_genres()">
+    <img src="background.jpg">
+    <div class="center-zone">
+        <div class="top_zone">
+            <div class="header">Final Project: Movies</div>
+            <div class="description">The purpose of our database is to recommend movies to people based on information they submit. For example, someone could enter "Horror" and movies within the database that meet that criteria will populate.</div>
+        </div>
+        <div class="bottom_zone">
+            <div class="movie_genre" id="movie_genre">
+
+            </div>
+            <div class="movie_selection" id="movie_selection">
+
+            </div>
+            <div class="movie_information" id="movie_information">
+
+            </div>
+        </div>
+    </div>
+    <div class="panel" id="panel" onclick="close_panel()">
+        <div class="panel_module" id="panel_module"></div>
+    </div>
+</body>
+<script>
+    function build_xmlhttp() {
+        if (window.XMLHttpRequest) { xmlhttp = new XMLHttpRequest(); }
+        else { xmlhttp = new ActiveXObject("Microsoft.XMLHTTP"); }
+        return xmlhttp;
+    }
+
+    function update_page(url_orders, what_to_update) {
+        var xmlhttp = build_xmlhttp();
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById(what_to_update).innerHTML = this.responseText;
+            }
+        }
+        xmlhttp.open("GET", "backend.php?" + url_orders, true);
+        xmlhttp.send();
+    }
+
+    function populate_genres() {
+        update_page("orders=get_genres", "movie_genre")
+    }
+
+    function populate_movies(genre) {
+        update_page("orders=get_movies&genre=" + genre, "movie_selection")
+    }
+
+    function get_movie_info(id) {
+        update_page("orders=get_movie_info&id=" + id, "movie_information")
+    }
+
+    function open_panel(id) {
+        update_page("orders=get_panel&id=" + id, "panel_module");
+        document.getElementById("panel").style.visibility = "visible";
+    }
+
+    function close_panel() {
+        document.getElementById("panel").style.visibility = "hidden";
+    }
+
+</script>
+</html>
